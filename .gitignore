@@ -26,7 +26,13 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+.env
 .env*.local
+.env.production
+
+# Supabase link (project ref)
+supabase/.branches
+supabase/.temp
 
 # vercel
 .vercel

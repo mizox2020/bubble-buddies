@@ -1,0 +1,3 @@
+-- Optional seed data for local development.
+-- Add INSERT statements here; they run after migrations on `supabase db reset`.
+-- Example: insert into public.services (name, price) values ('Test Service', 99);

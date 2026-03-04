@@ -4,24 +4,32 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --foreground: #1a1a2e;
+  --brand-pink: #ff6b9d;
+  --brand-blue: #45b7d1;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-brand-gradient px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all hover:shadow-xl hover:scale-105 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-full border-2 border-brand-pink px-6 py-3 text-sm font-semibold text-brand-pink transition-all hover:bg-brand-pink hover:text-white active:scale-95;
+  }
+
+  .card {
+    @apply rounded-2xl bg-white p-6 shadow-lg transition-all hover:shadow-xl;
+  }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .text-gradient {
+    @apply bg-brand-gradient bg-clip-text text-transparent;
   }
 }

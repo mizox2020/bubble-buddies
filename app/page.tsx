@@ -1,101 +1,92 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import Link from "next/link";
+import HomeHero from "@/components/HomeHero";
+import FAQ from "@/components/FAQ";
+import { faqs } from "@/lib/faq-data";
+import JsonLd, { LOCAL_BUSINESS_SCHEMA, buildFaqSchema } from "@/components/JsonLd";
+import { DFW_CITIES } from "@/lib/cities";
+
+export const metadata: Metadata = {
+  title: "Bubble & Foam Parties in Dallas Fort Worth | TheBubbleHeros",
+  description:
+    "DFW's favorite bubble and foam party service. We bring foam cannons, bubble machines, and trained operators to your backyard, school, or event. Serving Dallas, Fort Worth, Frisco, Plano, and 20+ cities.",
+  openGraph: {
+    title: "Bubble & Foam Parties in Dallas Fort Worth | TheBubbleHeros",
+    description:
+      "Book the ultimate foam party experience in DFW. Non-toxic, mess-free, and fun for all ages!",
+    url: "https://thebubbleheros.com",
+  },
+};
+
+const topCities = DFW_CITIES.slice(0, 8);
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      <JsonLd data={LOCAL_BUSINESS_SCHEMA} />
+      <JsonLd data={buildFaqSchema(faqs)} />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      <HomeHero />
+
+      {/* About Our Bubble Parties — keyword-rich content for crawlers */}
+      <section className="py-20 px-4 bg-white/60">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
+            Foam Party & Bubble Truck Rentals Across{" "}
+            <span className="text-gradient">Dallas-Fort Worth</span>
+          </h2>
+          <div className="prose prose-gray max-w-none text-gray-600 text-sm md:text-base leading-relaxed space-y-4">
+            <p>
+              TheBubbleHeros is a mobile foam and bubble party service proudly
+              serving the entire DFW Metroplex. We bring professional-grade foam
+              cannons, industrial bubble machines, high-energy music, and trained
+              operators directly to your location — whether that is your backyard
+              in Frisco, a school playground in Plano, a church parking lot in
+              Fort Worth, or a corporate venue in Dallas.
+            </p>
+            <p>
+              Our foam solution is 100% organic, non-toxic, hypoallergenic, and
+              biodegradable. It is safe for kids of all ages, gentle on sensitive
+              skin, and leaves absolutely no mess behind — the foam evaporates
+              within 15 to 30 minutes after the party. No cleanup required.
+            </p>
+            <p>
+              Whether you are planning a kids birthday party, a summer block
+              party, a school field day, a VBS event, a graduation celebration,
+              or a corporate team-building outing, our bubble and foam party
+              packages are designed to deliver an unforgettable experience. We
+              handle all setup, operation, and teardown so you can focus on
+              making memories.
+            </p>
+          </div>
+
+          {/* Service area links */}
+          <div className="mt-10 text-center">
+            <h3 className="text-lg font-semibold text-gray-700 mb-4">
+              Serving Cities Across the DFW Metroplex
+            </h3>
+            <div className="flex flex-wrap justify-center gap-2">
+              {topCities.map((city) => (
+                <Link
+                  key={city.slug}
+                  href={`/areas/${city.slug}`}
+                  className="text-sm px-3 py-1.5 rounded-full bg-brand-gradient-soft/40 text-gray-700 hover:text-brand-pink transition-colors"
+                >
+                  {city.name}
+                </Link>
+              ))}
+              <Link
+                href="/areas/dallas"
+                className="text-sm px-3 py-1.5 rounded-full bg-brand-pink/10 text-brand-pink font-medium hover:bg-brand-pink/20 transition-colors"
+              >
+                + {DFW_CITIES.length - topCities.length} more cities
+              </Link>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      <FAQ />
+    </>
   );
 }

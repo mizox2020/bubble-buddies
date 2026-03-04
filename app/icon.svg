@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Bubble cluster - transparent background -->
+  <circle cx="16" cy="14" r="8" fill="#FF6B9D" opacity="0.95"/>
+  <circle cx="21" cy="18" r="6" fill="#45B7D1" opacity="0.9"/>
+  <circle cx="11" cy="18" r="5" fill="#FF85B1" opacity="0.85"/>
+  <circle cx="16" cy="21" r="5" fill="#4ECDC4" opacity="0.85"/>
+  <circle cx="9" cy="14" r="4" fill="#FFD4E5" opacity="0.9"/>
+  <circle cx="23" cy="13" r="3" fill="#D4F1F9" opacity="0.9"/>
+</svg>
