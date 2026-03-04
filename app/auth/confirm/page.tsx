@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function AuthConfirmPage() {
+function AuthConfirmContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [status, setStatus] = useState<"loading" | "success" | "error">("loading");
@@ -80,5 +80,17 @@ export default function AuthConfirmPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function AuthConfirmPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-sky-50 via-blue-50 to-pink-50">
+        <div className="w-12 h-12 border-4 border-brand-pink border-t-transparent rounded-full animate-spin" />
+      </div>
+    }>
+      <AuthConfirmContent />
+    </Suspense>
   );
 }
