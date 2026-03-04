@@ -26,15 +26,16 @@ export default function AuthForm() {
 
     try {
       if (tab === "login") {
-        const { error } = await supabase.auth.signInWithPassword({
+        const { data, error } = await supabase.auth.signInWithPassword({
           email,
           password,
         });
         if (error) throw error;
-        router.push("/dashboard");
+        const { data: profile } = await supabase.from("profiles").select("welcome_seen_at").eq("id", data.user.id).single();
+        router.push(profile?.welcome_seen_at ? "/dashboard" : "/welcome");
         router.refresh();
       } else {
-        const redirectTo = typeof window !== "undefined" ? `${window.location.origin}/dashboard` : "/dashboard";
+        const redirectTo = typeof window !== "undefined" ? `${window.location.origin}/welcome` : "/welcome";
         const { data, error } = await supabase.auth.signUp({
           email,
           password,
@@ -46,7 +47,7 @@ export default function AuthForm() {
         if (error) throw error;
 
         if (data.session) {
-          router.push("/dashboard");
+          router.push("/welcome");
           router.refresh();
         } else {
           setSuccess(

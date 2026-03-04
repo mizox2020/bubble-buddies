@@ -37,7 +37,7 @@ export async function updateSession(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // Redirect unauthenticated users away from protected routes
-  if (!user && (pathname.startsWith("/dashboard") || pathname.startsWith("/admin"))) {
+  if (!user && (pathname.startsWith("/dashboard") || pathname.startsWith("/admin") || pathname === "/welcome")) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     return NextResponse.redirect(url);
@@ -46,7 +46,8 @@ export async function updateSession(request: NextRequest) {
   // Redirect authenticated users away from login page
   if (user && pathname === "/login") {
     const url = request.nextUrl.clone();
-    url.pathname = "/dashboard";
+    const { data: profile } = await supabase.from("profiles").select("welcome_seen_at").eq("id", user.id).single();
+    url.pathname = profile?.welcome_seen_at ? "/dashboard" : "/welcome";
     return NextResponse.redirect(url);
   }
 

@@ -229,7 +229,7 @@ otp_expiry = 3600
 # Branded confirm signup template
 [auth.email.template.confirmation]
 subject = "You're almost a hero! Confirm your Bubble Heroes account"
-content_path = "./templates/confirm.html"
+content_path = "supabase/templates/confirm.html"
 
 # Uncomment to customize notification email template
 # [auth.email.notification.password_changed]
