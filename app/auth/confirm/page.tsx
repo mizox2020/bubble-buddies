@@ -37,6 +37,7 @@ function AuthConfirmContent() {
       }
 
       setStatus("success");
+      fetch("/api/send-welcome-email", { method: "POST", credentials: "include" }).catch(() => {});
       const redirect = redirectTo || "/dashboard";
       setTimeout(() => router.push(redirect), 1500);
     };

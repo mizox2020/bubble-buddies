@@ -39,6 +39,7 @@ export default function WelcomePage() {
       }
       setUserName(user.user_metadata?.full_name || user.email?.split("@")[0] || "Hero");
       setLoading(false);
+      fetch("/api/send-welcome-email", { method: "POST", credentials: "include" }).catch(() => {});
     }
     load();
   }, [supabase, router]);
