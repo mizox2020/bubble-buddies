@@ -34,10 +34,14 @@ export default function AuthForm() {
         router.push("/dashboard");
         router.refresh();
       } else {
+        const redirectTo = typeof window !== "undefined" ? `${window.location.origin}/dashboard` : "/dashboard";
         const { data, error } = await supabase.auth.signUp({
           email,
           password,
-          options: { data: { full_name: fullName } },
+          options: {
+            data: { full_name: fullName },
+            emailRedirectTo: redirectTo,
+          },
         });
         if (error) throw error;
 

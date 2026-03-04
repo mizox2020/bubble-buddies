@@ -72,8 +72,12 @@ supabase db reset
 # 1. Test locally
 supabase db reset
 
-# 2. Push to cloud
+# 2. Push schema to cloud
 supabase db push
+
+# 3. (Optional) Push local data to cloud
+./supabase/scripts/push-data.sh '<REMOTE_DB_URL>'
+# Get REMOTE_DB_URL: Dashboard → Project Settings → Database → Connection string (URI)
 ```
 
 ## Environment Variables
@@ -96,6 +100,24 @@ supabase/
 │   └── ...
 └── seed.sql             # Optional: seed data (run on db reset)
 ```
+
+## Push Local Data to Cloud
+
+To copy data from your local DB to the hosted project:
+
+```bash
+# 1. Ensure schema is on remote
+supabase db push
+
+# 2. Run the script (requires pg_dump/psql)
+./supabase/scripts/push-data.sh 'postgresql://postgres.[ref]:[PASSWORD]@aws-0-[region].pooler.supabase.com:6543/postgres'
+```
+
+Get the connection string from **Supabase Dashboard → Project Settings → Database → Connection string** (URI mode).
+
+The script dumps `public` schema data (services, slots, booking_questions, profiles, bookings, payments) and restores to remote. Use `--no-truncate` to append without clearing existing rows.
+
+**Note:** User accounts (`auth.users`) are not copied. Users sign up fresh on production. Only app data (services, slots, bookings, etc.) is migrated.
 
 ## Troubleshooting
 
