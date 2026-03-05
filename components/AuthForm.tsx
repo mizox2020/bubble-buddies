@@ -30,6 +30,17 @@ export default function AuthForm() {
           email,
           password,
         });
+
+        if (error?.message === "Email not confirmed") {
+          const redirectTo = typeof window !== "undefined"
+            ? `${window.location.origin}/welcome`
+            : "/welcome";
+          await supabase.auth.resend({ type: "signup", email, options: { emailRedirectTo: redirectTo } });
+          setSuccess("Your email isn't verified yet. We just sent a new confirmation link — check your inbox.");
+          setLoading(false);
+          return;
+        }
+
         if (error) throw error;
         const { data: profile } = await supabase.from("profiles").select("welcome_seen_at").eq("id", data.user.id).single();
         router.push(profile?.welcome_seen_at ? "/dashboard" : "/welcome");
