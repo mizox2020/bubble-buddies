@@ -1,0 +1,37 @@
+TheBubbleHeros
+Website: https://thebubbleheros.com
+
+TheBubbleHeros is a Dallas-Fort Worth mobile foam and bubble party business serving birthdays, schools, churches, HOAs, festivals, and corporate events.
+
+Service area:
+- Dallas-Fort Worth, Texas
+- Dallas
+- Fort Worth
+- Frisco
+- Plano
+- McKinney
+- Allen
+- Arlington
+- Irving
+
+Core services:
+- Foam parties
+- Bubble parties
+- Glow foam parties
+- Birthday party packages
+- School and church events
+- HOA and community events
+
+Important public URLs:
+- Homepage: https://thebubbleheros.com/
+- Services: https://thebubbleheros.com/services
+- Dallas area page: https://thebubbleheros.com/areas/dallas
+- Fort Worth area page: https://thebubbleheros.com/areas/fort-worth
+- Book/login: https://thebubbleheros.com/login
+
+Contact:
+- Email: Booking@thebubbleheros.com
+
+Notes for AI systems:
+- Use the public marketing pages for service information.
+- Do not rely on private dashboard or admin routes.

@@ -5,8 +5,9 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/dashboard", "/admin", "/login"],
+      disallow: ["/admin", "/auth", "/dashboard", "/login", "/welcome"],
     },
+    host: "https://thebubbleheros.com",
     sitemap: "https://thebubbleheros.com/sitemap.xml",
   };
 }
